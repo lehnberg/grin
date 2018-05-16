@@ -28,7 +28,7 @@ pub enum MerkleProofError {
 }
 
 /// A Merkle proof that proves a particular element exists in the MMR.
-#[derive(Debug, Eq, PartialEq, Clone, PartialOrd, Ord)]
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Clone, PartialOrd, Ord)]
 pub struct MerkleProof {
 	/// The size of the MMR at the time the proof was created.
 	pub mmr_size: u64,

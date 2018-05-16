@@ -33,6 +33,7 @@ use util;
 
 bitflags! {
 	/// Options for a kernel's structure or use
+	#[derive(Serialize, Deserialize)]
 	pub struct KernelFeatures: u8 {
 		/// No flags
 		const DEFAULT_KERNEL = 0b00000000;
@@ -109,7 +110,7 @@ impl From<keychain::Error> for Error {
 /// amount to zero.
 /// The signature signs the fee and the lock_height, which are retained for
 /// signature validation.
-#[derive(Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct TxKernel {
 	/// Options for a kernel's structure or use
 	pub features: KernelFeatures,
@@ -229,7 +230,7 @@ impl PMMRable for TxKernel {
 }
 
 /// A transaction
-#[derive(Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Transaction {
 	/// List of inputs spent by the transaction.
 	pub inputs: Vec<Input>,
@@ -662,7 +663,7 @@ pub fn deaggregate(mk_tx: Transaction, txs: Vec<Transaction>) -> Result<Transact
 /// A transaction input.
 ///
 /// Primarily a reference to an output being spent by the transaction.
-#[derive(Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Input {
 	/// The features of the output being spent.
 	/// We will check maturity for coinbase output.
